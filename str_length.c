@@ -13,5 +13,5 @@ size_t length(const char* __restrict string)
 {
 	size_t count = 0;//카운트 변수
 	while (*string++) ++count;//카운트 루프
-	return count;카운트 리턴
+	return count;//카운트 리턴
 }
