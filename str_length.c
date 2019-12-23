@@ -1,17 +1,23 @@
 #include<stdio.h>
 
-size_t length(const char* __restrict string);
+char* strCopy(const char* __restrict source, const char* __restrict destination);
 
 int main()
 {
 	char str[] = "dohyunKim";
-	printf("%zd", length(str));
+	char str2[10];
+	strCopy(str, str2);
+	printf("%s", str2);
+
+	
 }
 
 
-size_t length(const char* __restrict string)
+char* strCopy(const char* __restrict source, const char* __restrict destination)
 {
-	size_t count = 0;
-	while (*string++) ++count;
-	return count;
+	while (*source)
+	{
+		*(destination++) = *(source++);
+	}
+	return destination;
 }
