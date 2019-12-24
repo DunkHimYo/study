@@ -4,40 +4,40 @@
 //number version
 
 typedef struct {
-	unsigned int SSN_front;//ÁÖ¹Î¹øÈ£ ¾Õ ºÎºĞ
-	unsigned int SSN_back;//ÁÖ¹Î¹øÈ£ µŞ ºÎºĞ
-	unsigned long long SSN_total;//ÁÖ¹Î¹øÈ£ ÀüÃ¼
+	unsigned int SSN_front;//ì£¼ë¯¼ë²ˆí˜¸ ì• ë¶€ë¶„
+	unsigned int SSN_back;//ì£¼ë¯¼ë²ˆí˜¸ ë’· ë¶€ë¶„
+	unsigned long long SSN_total;//ì£¼ë¯¼ë²ˆí˜¸ ì „ì²´
 }SSN;
 
 unsigned long long SSN_Calculation(unsigned int SSN_front, unsigned int SSN_back);
-//ÁÖ¹Î¹øÈ£ ÀüÃ¼ °è»ê
+//ì£¼ë¯¼ë²ˆí˜¸ ì „ì²´ ê³„ì‚°
 
 int main()
 {
-	int people = 0;//»ç¶÷¼ö º¯¼ö
-	printf("»ç¶÷µéÀÇ ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ");
-	scanf_s("%d", &people);//»ç¶÷¼ö ÀÔ·Â
-	SSN* a = malloc(people * sizeof(SSN));//±¸Á¶Ã¼ µ¿Àû ¹è¿­ »ı¼º
+	int people = 0;//ì‚¬ëŒìˆ˜ ë³€ìˆ˜
+	printf("ì‚¬ëŒë“¤ì˜ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš” : ");
+	scanf_s("%d", &people);//ì‚¬ëŒìˆ˜ ì…ë ¥
+	SSN* a = malloc(people * sizeof(SSN));//êµ¬ì¡°ì²´ ë™ì  ë°°ì—´ ìƒì„±
 	for (register ptrdiff_t i = 0; i <people; i++)
 	{
-		scanf_s("%6d-%7d", &(a+i)->SSN_front, &(a+i)->SSN_back);//ÁÖ¹Î ¾Õ,µÚ ÀÔ·Â
+		scanf_s("%6d-%7d", &(a+i)->SSN_front, &(a+i)->SSN_back);//ì£¼ë¯¼ ì•,ë’¤ ì…ë ¥
 		
-		(a+i)->SSN_total = SSN_Calculation((a+i)->SSN_front, (a+i)->SSN_back);//ÁÖ¹Î ÃÑÇÕ °è»ê
-		printf("%013llu\n", (a+i)->SSN_total);//Ãâ·Â
+		(a+i)->SSN_total = SSN_Calculation((a+i)->SSN_front, (a+i)->SSN_back);//ì£¼ë¯¼ ì´í•© ê³„ì‚°
+		printf("%013llu\n", (a+i)->SSN_total);//ì¶œë ¥
 	}
-	
+	free(a);//
 
 
 }
 
 unsigned long long SSN_Calculation(unsigned int SSN_front, unsigned int SSN_back)
 {
-	unsigned long long SSN;//ÁÖ¹Î¹øÈ£ ÀüÃ¼¸¦ ´ã´Â º¯¼ö
+	unsigned long long SSN;//ì£¼ë¯¼ë²ˆí˜¸ ì „ì²´ë¥¼ ë‹´ëŠ” ë³€ìˆ˜
 
-	SSN = SSN_front;//ÁÖ¹Î¹øÈ£ ¾ÕºÎºĞ ³Ö±â
+	SSN = SSN_front;//ì£¼ë¯¼ë²ˆí˜¸ ì•ë¶€ë¶„ ë„£ê¸°
 
-	double digit = log10((double)SSN_back) + 1;//ÁÖ¹Î µŞ¹Ù¸®¼ö °è»ê
-	SSN *= (unsigned long long)pow(10, (int)digit);//ÁÖ¹Î ¾ÕºÎºĞ*10^ÁÖ¹ÎµŞºÎºĞ
-	SSN += SSN_back;//ÁÖ¹Î µŞÀÚ¸® ´õÇÏ±â
+	double digit = log10((double)SSN_back) + 1;//ì£¼ë¯¼ ë’·ë°”ë¦¬ìˆ˜ ê³„ì‚°
+	SSN *= (unsigned long long)pow(10, (int)digit);//ì£¼ë¯¼ ì•ë¶€ë¶„*10^ì£¼ë¯¼ë’·ë¶€ë¶„
+	SSN += SSN_back;//ì£¼ë¯¼ ë’·ìë¦¬ ë”í•˜ê¸°
 	return SSN;
 }
