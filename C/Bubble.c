@@ -1,18 +1,18 @@
 #include<stdio.h>
 typedef int E;
-
+#define TEMP(element,x,y) do{element temp;temp=x;x=y;y=temp;}while(0);
 void buble(E* array, size_t len, E (*sortFunction)(E*, E*));
 void temp(E* pivot, E* target);
+
 E ACDSort(E* n1, E* n2);
 E DSDSort(E* n1, E* n2);
 
 int main()
 {
-	E a[] = { 5,2,3,1,4 };
-	size_t size = sizeof(a) / sizeof(E);
-	buble(a,size , ACDSort);
-	for (int i = 0; i <size ; i++)
-		printf("%d ", a[i]);
+	int a = 5;
+	int b = 6;
+	TEMP(int, a, b);
+	printf("%d", a);
 }
 
 E ACDSort(E* n1, E* n2)

@@ -1,18 +1,18 @@
 #include<stdio.h>
+typedef void(*type)(void);
+typedef char* a[5];
+
 
 void AddProc(void);
 void MinusProc(void);
-void(*RetFuncPtr(int sel))(void);
+type RetFuncPtr(int sel);
+
 
 
 int main()
 {
-	void (*fctPtr)(void);
-	fctPtr = RetFuncPtr(1);
-	fctPtr();
-
-	fctPtr = RetFuncPtr(2);
-	fctPtr();
+	a b = { "what","are" };
+	printf("%s", b[0]);
 	return 0;
 	
 }
