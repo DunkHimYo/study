@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdarg.h>
 
-typedef char data;
+typedef int data;
 
 typedef data(*althmetic)(int, ...);
 
@@ -11,11 +11,11 @@ data cal_sub(int count, ...);
 data cal_div(int count, ...);
 althmetic cal(int select);
 
-enum alth {ad=1,su,mu,di};
+enum alth { ad = 1, su, mu, di };
 int main()
 {
-	printf("%d",cal(su)(3, 1, 2, 3));
-	
+	printf("%d", cal(su)(3, 1, 2, 3));
+
 	return 0;
 
 }
@@ -40,7 +40,7 @@ althmetic cal(int select)
 	default:
 		p = NULL;
 	}
-	
+
 	return p;
 
 }
@@ -57,7 +57,7 @@ data cal_add(int count, ...)
 	}
 
 	va_end(ap);
-	return sum_value;
+	return (data)sum_value;
 
 }
 
@@ -65,14 +65,14 @@ data cal_mul(int count, ...)
 {
 	va_list ap;
 	va_start(ap, count);
-	data mul_value = 0;
+	data mul_value = 1;
 	for (register int i = 0; i < count; i++)
 	{
 		mul_value *= (data)va_arg(ap, data);
 	}
 
 	va_end(ap);
-	return mul_value;
+	return (data)mul_value;
 
 }
 
@@ -80,14 +80,14 @@ data cal_sub(int count, ...)
 {
 	va_list ap;
 	va_start(ap, count);
-	data sub_value = 0;
-	for (register int i = 0; i < count; i++)
+	data sub_value = (data)va_arg(ap, data);
+	for (register int i = 0; i < count-1; i++)
 	{
-		sub_value += (data)va_arg(ap, data);
+		sub_value -= (data)va_arg(ap, data);
 	}
 
 	va_end(ap);
-	return sub_value;
+	return (data)sub_value;
 }
 
 data cal_div(int count, ...)
@@ -95,11 +95,11 @@ data cal_div(int count, ...)
 	va_list ap;
 	va_start(ap, count);
 	data div_value = (data)va_arg(ap, data);;
-	for (register int i = 0; i < count-1; i++)
+	for (register int i = 0; i < count - 1; i++)
 	{
 		div_value /= (data)va_arg(ap, data);
 	}
 
 	va_end(ap);
-	return div_value;
+	return (data)div_value;
 }
