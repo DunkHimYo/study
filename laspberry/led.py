@@ -29,3 +29,34 @@ def main(args):
     GPIO.output(R_LED_PIN, GPIO.HIGH)
     print(“RED LED ON”)
     time.sleep(1)
+    
+    GPIO.output(R_LED_PIN, GPIO.LOW)
+    print(“RED LED OFF”)
+    time.sleep(1)
+
+    GPIO.output(G_LED_PIN, GPIO.HIGH)
+    print(“GREEN LED ON”)
+    time.sleep(1)
+
+    GPIO.output(G_LED_PIN, GPIO.LOW)
+    print(“GREEN LED OFF”)
+    time.sleep(1)
+
+    GPIO.output(B_LED_PIN, GPIO.HIGH)
+    print(“BLUE LED ON”)
+    time.sleep(1)
+
+    GPIO.output(B_LED_PIN, GPIO.LOW)
+    print(“BLUE LED OFF”)
+    time.sleep(1)
+
+    # 리소스 시스템에 반환
+    GPIO.cleanup()                       
+    
+    return 0
+
+if __name__ == '__main__':
+    import sys
+
+    sys.exit(main(sys.argv))
+
