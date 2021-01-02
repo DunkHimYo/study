@@ -1,4 +1,5 @@
 #include<iostream>
+#include<time.h>
 
 class string {
 	char* str = 0;
@@ -13,6 +14,9 @@ public:
 	int strlen(); // 문자열 길이 리턴
 	int strlen(const char* s);
 	char* get_str();
+private:
+	inline void chr_unit_processing(char* const start_ptr, const char* s);
+	inline void int_unit_processing(char* const start_ptr, const char* s);
 };
 string::string(char c, int n)
 {
@@ -37,14 +41,32 @@ string::string(const char* s)
 	this->len = strlen(s);
 	if ((this->str = (char*)malloc(sizeof(char) * (this->len + 1))) != NULL)
 	{
-		char* _start_str = this->str;
-		while (*s)
-		{
-			*_start_str++ = *s++;
-		}
-		*_start_str = '\0';
+		int_unit_processing(this->str,s);
 	}
 
+}
+inline void string::chr_unit_processing(char* const start_ptr,const char* s)
+{
+	char* _start_ptr = start_ptr;
+	while (*s)
+	{
+		*_start_ptr++ = *s++;
+	}
+	*_start_ptr = '\0';
+}
+inline void string::int_unit_processing(char* const start_ptr, const char* s)
+{
+	int* _start_int_ptr = (int*)start_ptr;
+	int* _sec_int_ptr = (int*)s;
+	int strlen = this->len;
+
+	while (strlen>4)
+	{
+		*_start_int_ptr++ = *_sec_int_ptr++;
+		strlen -= 4;
+	}
+
+	chr_unit_processing((char*)_start_int_ptr, (char*)_sec_int_ptr);
 }
 
 string::string(const string& s)
@@ -84,13 +106,9 @@ void string::add_string(const string& s)
 	{
 		if ((this->str = (char*)realloc(this->str, this->len + 1)) != NULL)
 		{
-			char* _sec_ptr = this->str + _main_len;
-			char* _sec_str = s.str;
-			while (*_sec_str)
-			{
-				*_sec_ptr++ = *_sec_str++;
-			}
-			*_sec_ptr = '\0';
+			char* _main_ptr = this->str + _main_len;
+			char* _sec_ptr = s.str;
+			chr_unit_processing(_main_ptr, _sec_ptr);
 		}
 	}
 }
@@ -120,10 +138,8 @@ char* string::get_str()
 
 int main()
 {
-	string a("oh");
-	a.add_string(string(" good"));
+	clock_t start= clock();
+	string a("asdfoiwenfioqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvppppppppppppppppppppppppppppppppppppppppwwwwwwwwwwwwwwwwwwwwweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeewaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbwedo.cccccccccccccccccccccccccccccc...........................................cccccccccccccccccccoooooooooooooooooooooooooooooooooooooooooooooooooooooooommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmttttttttttttttttttttttttttttttttttttttttttttttttttttttttaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadddnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnccccccccccccccccccccccccccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyypppppppppppppppppppppppppppppppppppppppppppppppppzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzccccccccccccccccccccccccccccccccccccccccccccnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrddqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqrddddddddddddddddddppppppppppppppppppppppppeeeeeeeeeeeeeeeeeeeeeeeeeeenfioasassdfwfewekfnwoisdfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasdfasdfaaaaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssenfoiwenfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	std::cout << a.get_str()<<'\n';
-
-	a.copy_string(string("wow"));
-	std::cout << a.get_str()<<'\n';
+	std::cout << ((double)clock() - start) / CLOCKS_PER_SEC << '\n';
 }
