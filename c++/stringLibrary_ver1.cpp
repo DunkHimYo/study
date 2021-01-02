@@ -1,5 +1,5 @@
 #include<iostream>
-#include<time.h>
+#include<chrono>
 
 class string {
 	char* str = 0;
@@ -138,8 +138,9 @@ char* string::get_str()
 
 int main()
 {
-	clock_t start= clock();
-	string a("asdfoiwenfioqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvppppppppppppppppppppppppppppppppppppppppwwwwwwwwwwwwwwwwwwwwweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeewaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbwedo.cccccccccccccccccccccccccccccc...........................................cccccccccccccccccccoooooooooooooooooooooooooooooooooooooooooooooooooooooooommmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmttttttttttttttttttttttttttttttttttttttttttttttttttttttttaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadddnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnccccccccccccccccccccccccccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyypppppppppppppppppppppppppppppppppppppppppppppppppzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzccccccccccccccccccccccccccccccccccccccccccccnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrddqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqrddddddddddddddddddppppppppppppppppppppppppeeeeeeeeeeeeeeeeeeeeeeeeeeenfioasassdfwfewekfnwoisdfddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasdfasdfaaaaddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssenfoiwenfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+	string a("goooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooood");
 	std::cout << a.get_str()<<'\n';
-	std::cout << ((double)clock() - start) / CLOCKS_PER_SEC << '\n';
+	std::chrono::duration<double> sec = std::chrono::system_clock::now() - start;
+	std::cout << "Test() 함수를 수행하는 걸린 시간(초) : " << sec.count() << " seconds" << std::endl;
 }
